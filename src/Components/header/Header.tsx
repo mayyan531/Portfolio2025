@@ -3,33 +3,45 @@ import { TiHeart } from "react-icons/ti";
 type Props = {}
 
 const Header = (props: Props) => {
+  const handleHeaderClick = (location: number) => {
+    window.scrollTo({
+      top: location,
+      behavior: 'smooth'
+    })
+  }
+
   return (
-    <div className="absolute top-0 w-full">
-      <div className="sticky top-0 z-1 text-navy-blue">
-        <div className="w-full h-10 flex items-center justify-between py-9 px-10">
-          <div className="w-36 font-bold italic text-[28px] flex rounded-full">
-            <TiHeart size="16px" className="mr-1"/>
-          </div>
+    <div className="sticky top-0 z-4 text-cream">
+      <div className="w-full h-10 flex items-center justify-between py-8 px-10">
+        <div className="w-36 font-bold italic text-[28px] flex rounded-full">
+          <TiHeart size="20px" className="mr-1"/>
+        </div>
 
-          <div className="text-[16px]">
-            <button className="mx-2 p-0.5 border-2 border-navy-blue rounded-md w-30 tracking-wider font-bold">
-              Home
-            </button>
+        <div className="text-[16px] font-inter pointer-events-auto text-navy-blue ">
+          <button 
+            className="mx-2 p-0.5 border-2 border-navy-blue bg-cream rounded-md w-30 tracking-wider font-medium hover:bg-navy-blue hover:text-cream hover:shadow-md hover:cursor-pointer transition-colors duration-100 ease-in-out" 
+            onClick={() => handleHeaderClick(0)}>
+            Home
+          </button>
 
-            <button className="mx-2 p-0.5 border-2 border-navy-blue rounded-md w-30 tracking-wider font-bold">
-              About
-            </button>
+          <button 
+            className="mx-2 p-0.5 border-2 border-navy-blue bg-cream rounded-md w-30 tracking-wider font-medium hover:bg-navy-blue hover:text-cream hover:shadow-md hover:cursor-pointer transition-colors duration-100 ease-in-out" 
+            onClick={() => handleHeaderClick(window.innerHeight)}>
+            About
+          </button>
 
-            <button className="mx-2 p-0.5 border-2 border-navy-blue rounded-md w-30 tracking-wider font-bold">
-              Projects
-            </button>
-          </div>
+          <button 
+            className="mx-2 p-0.5 border-2 border-navy-blue bg-cream text-navy-blue rounded-md w-30 tracking-wider font-medium hover:bg-navy-blue hover:text-cream hover:shadow-md hover:cursor-pointer transition-colors duration-100 ease-in-out" 
+            onClick={() => handleHeaderClick(window.innerHeight*2)}>
+            Projects
+          </button>
+        </div>
 
-          <div className="text-[16px]">
-            <button className="ml-2 p-0.5 border-2 bg-navy-blue text-cream rounded-md w-36 tracking-wider font-bold">
-              Contact
-            </button>
-          </div>
+        <div className="text-[16px] font-inter pointer-events-auto">
+          <button 
+            className="ml-2 p-0.5 border-2 border-navy-blue bg-navy-blue text-cream rounded-md w-36 tracking-wider font-medium hover:bg-blue hover:text-navy-blue hover:shadow-md hover:border-blue hover:cursor-pointer transition-colors duration-100 ease-in-out">
+            Contact
+          </button>
         </div>
       </div>
     </div>

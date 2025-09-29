@@ -7,8 +7,9 @@
   --font-inter: "Inter", sans-serif; 
 
   /* Colours */
-  --color-navy-blue: #212842;
-  --color-cream: #F0E7D5;
+  --color-navy-blue: #2A323F;
+  --color-blue: #c5d4dd;
+  --color-cream: #FEFEF2;
 
   @keyframes fade-in {
     0% {

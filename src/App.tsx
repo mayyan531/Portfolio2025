@@ -1,21 +1,29 @@
-import { useEffect, useState } from "react";
 import Folder from "./Components/home/folder/Folder"
-import Images from "./Components/home/images/Images";
 import Header from "./Components/header/Header";
 import About from "./Components/about/About";
+import Projects from "./Components/projects/Projects";
+import Scroll from "./Components/scroll/Scroll";
 
 function App() {
 
   return (
-    <div>
-      <div className="h-[100dvh] w-full">
+    <div className="relative">
+      <div className="absolute bottom-0 top-0">
+        <Scroll />
+      </div>
+      
+      <div className="h-[100dvh] w-full relative">
         <Folder />
-        <Images />
       </div>
 
-      <div className="h-auto w-full relative">
-        <Header />
+      <div className="relative">
+        <div className="absolute inset-0 h-full pointer-events-none">
+          <Header />
+        </div>
+
         <About />
+
+        <Projects />
       </div>
     </div>
   )

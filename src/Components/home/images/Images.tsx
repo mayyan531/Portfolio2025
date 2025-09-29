@@ -33,7 +33,7 @@ type Props = {}
 
 const Images = (props: Props) => {
   return (
-    <div className='absolute top-0 h-full w-full'>
+    <div className='absolute top-0 h-full w-full pointer-events-none'>
       <div className='fade-2'>
         <img src={watermelon} className='absolute w-[140px] h-auto bottom-[30px] left-[200px] rotate-70' />
         <img src={lily} className='absolute w-[220px] h-auto bottom-[200px] right-[280px]' />
@@ -42,15 +42,15 @@ const Images = (props: Props) => {
         <img src={cheesecake} className='absolute w-[240px] h-auto left-[210px] bottom-[290px]' />
         <img src={smiski} className='absolute w-[80px] h-auto top-[10px] right-[600px]' />
         <img src={smiski2} className='absolute w-[140px] h-auto bottom-[10px] right-[770px] ' />
-        <img src={machineFoot} className='absolute w-[70px] h-auto bottom-[50px] left-[40px]' />
+        <img src={machineFoot} className='absolute w-[70px] h-auto bottom-[20px] left-[90px]' />
       </div>
 
       <div className='fade-3'>
         <img src={ace} className='absolute w-[70px] h-auto left-[190px] bottom-[250px] -rotate-20' />
         <img src={blackCat} className='absolute w-[170px] h-auto left-[360px] bottom-[50px]' />
         <img src={globe} className='absolute w-[250px] h-auto bottom-[15px] right-[30px]' />
-        <img src={lilyOfTheValley} className='absolute w-[110px] h-auto bottom-[350px] left-[30px]' />
-        <img src={bowl} className='absolute w-[240px] h-auto left-[300px] top-[0px]' />
+        <img src={lilyOfTheValley} className='absolute w-[90px] h-auto bottom-[320px] left-[90px]' />
+        <img src={bowl} className='absolute w-[240px] h-auto left-[250px] top-[0px]' />
         <img src={bow} className='absolute w-[130px] h-auto bottom-[25px] right-[460px] rotate-20' />
         <img src={cd} className='absolute w-[190px] h-auto top-[20px] right-[280px]' />
       </div>
@@ -70,8 +70,8 @@ const Images = (props: Props) => {
         <img src={puzzle} className='absolute w-[90px] h-auto top-[25px] left-[580px] -rotate-30' /> 
         <img src={jili} className='absolute w-[210px] h-auto bottom-[20px] right-[230px]' />
         <img src={jewel} className='absolute w-[80px] h-auto left-[430px] top-[280px] -rotate-90' />
-        <img src={hat} className='absolute w-[150px] h-auto left-[60px] bottom-[120px]' />
-        <img src={thread} className='absolute w-[180px] h-auto left-[100px] top-[60px] rotate-20' />   
+        <img src={hat} className='absolute w-[150px] h-auto left-[30px] bottom-[120px]' />
+        <img src={thread} className='absolute w-[180px] h-auto left-[60px] top-[60px] rotate-20' />   
         <img src={cruelPrince} className='absolute w-[250px] h-auto top-[130px] right-[070px]' />
         <img src={pen} className='absolute w-[120px] h-auto top-[70px] right-[10px]' />   
       </div>

@@ -1,35 +1,36 @@
 import file from '../../../Assets/file.jpg'
+import Images from '../images/Images'
 
 type Props = {
 }
 
 const Folder = ({}: Props) => {
   return (
-    <div className='absolute top-0 h-full w-full flexh'>
-        {/* FILE IMAGE */}
-        <img src={file} alt='file folder' className='h-[500px] w-[650px]'/>
+    <div className='bg-cream flexh h-full w-full'>
+        <div className='relative h-[772.44px] w-[1689.78px] flexh'>
+            <Images />
+            <div className='inline-block relative'>
+                <img src={file} alt='file folder' className='h-[500px] w-[650px]'/>
 
-        <div className='absolute w-[630px] flex flex-col items-center justify-center '>
-            {/* WELCOME TO PORTFOLIO */}
-            <div className='mt-[160px] text-center text-navy-blue'>
-                <p className='font-medium text-[40px] tracking-wider'>
-                    Welcome to
-                </p>
+                <div className='absolute inset-0 flex flex-col items-center justify-center'>
+                    {/* WELCOME TO PORTFOLIO */}
+                    <div className='mt-[60px] text-center text-navy-blue'>
+                        <p className='text-[40px] tracking-wider'>
+                            Welcome to
+                        </p>
 
-                <p className='mt-[-45px] font-bold italic text-[96px] tracking-wider'>
-                    My Portfolio
-                </p>
+                        <p className='mt-[-45px] font-bold text-[96px] tracking-wider'>
+                            My <span className='italic'>Portfolio</span>
+                        </p>
+                    </div>
+                    
+                    {/* 2025-MAY YAN */}
+                    <div className='absolute bottom-5 right-5 px-4 rounded-md text-navy-blue font-inter text-[18px] font-medium italic bg-blue'>
+                        May Yan - 2025
+                    </div>
+                </div>
             </div>
-            
-            {/* BUTTON CLICK HERE */}
-            <button className='bg-navy-blue text-cream font-inter italic font-medium tracking-wider text-[18px] h-[40px] w-[130px] rounded-[3px] cursor-pointer mt-[20px]'>
-                Click Here!
-            </button>
-            
-            {/* 2025-MAY YAN */}
-            <div className='mt-[70px] text-right pr-[20px] w-full text-navy-blue font-inter text-[18px] font-bold italic'>
-                May Yan - 2025
-            </div>
+            {/* FILE IMAGE */}
         </div>
     </div>
   )
