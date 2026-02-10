@@ -1,5 +1,5 @@
-import note from '../../Assets/note.png'
-import patio from '../../Assets/patio.jpg'
+import note from '/Assets/note.png'
+import patio from '/Assets/patio.jpg'
 import { FaLinkedin } from "react-icons/fa";
 import { SiGithub } from "react-icons/si";
 import { BsFileEarmarkPerson } from "react-icons/bs";
@@ -56,7 +56,7 @@ const About = () => {
                 <SiGithub size="40px" className='mx-4 hover:text-blue'/>
               </a>
 
-              <a href="src\Files\May_Resume2026.pdf" target='_blank'>
+              <a href="/Files/May_Resume2026.pdf" target='_blank'>
                 <BsFileEarmarkPerson size="40px" className='mx-4 hover:text-blue'/>
               </a>
             </div>

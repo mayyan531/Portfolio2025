@@ -2,11 +2,7 @@ import { PiDiamondsFourFill } from "react-icons/pi";
 import { BsDot } from "react-icons/bs";
 import { useEffect, useState } from "react";
 
-interface Props {
-
-}
-
-const Scroll = (props: Props) => {
+const Scroll = () => {
   const [position, setPosition ] = useState<number>(0);
   const vh = window.innerHeight;
 

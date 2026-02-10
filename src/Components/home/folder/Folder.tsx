@@ -1,4 +1,4 @@
-import file from '../../../Assets/file.png'
+import file from '/Assets/file.png'
 import Images from '../images/Images'
 
 type Props = {

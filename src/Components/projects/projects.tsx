@@ -1,11 +1,11 @@
-import folder from "../../Assets/blueFolder.png"
-import postcard from "../../Assets/postcard.png"
-import note2 from "../../Assets/note2.png"
-import reciept from "../../Assets/reciept.png"
-import paper from "../../Assets/paper.png"
+import folder from "/Assets/blueFolder.png"
+import postcard from "/Assets/postcard.png"
+import note2 from "/Assets/note2.png"
+import reciept from "/Assets/reciept.png"
+import paper from "/Assets/paper.png"
 import { useEffect, useState } from "react"
-import lily from "../../Assets/lily.png"
-import orchid from "../../Assets/orchid.png"
+import lily from "/Assets/lily.png"
+import orchid from "/Assets/orchid.png"
 
 const projects = () => {
   const [cardsClicked, setCardsClicked] = useState(false);
