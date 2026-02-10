@@ -24,7 +24,7 @@
 
 @layer utilities{
   .flexh{
-    @apply flex align-middle items-center justify-center
+    @apply flex align-middle items-center justify-center;
   }
 
   .fade-1{

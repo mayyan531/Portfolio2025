@@ -13,7 +13,6 @@ const Scroll = (props: Props) => {
   const handleScroll = () => {
     const pos = window.pageYOffset;
     setPosition(pos);
-    console.log(pos);
   }
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -32,7 +31,7 @@ const Scroll = (props: Props) => {
   }
 
   return (
-    <div className='sticky h-[100dvh] p-6 z-10 top-0 flex flex-col justify-center items-center text-navy-blue'>
+    <div className='hidden md:flex sticky h-[100dvh] p-6 z-10 top-0 flex-col justify-center items-center text-navy-blue'>
       <div className="hover:bg-blue/90 transition-colors duration-200 ease-in-out h-30 p-0.5 rounded-full flex flex-col items-center justify-evenly align-middle">
       {/* First indicator */}
         <button 

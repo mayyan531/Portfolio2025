@@ -4,26 +4,25 @@ import { FaLinkedin } from "react-icons/fa";
 import { SiGithub } from "react-icons/si";
 import { BsFileEarmarkPerson } from "react-icons/bs";
 
-type Props = {}
-
-const About = (props: Props) => {
+const About = () => {
+  const isWiderOrLonger = window.innerWidth > window.innerHeight;
   return (
-    <div className='h-[100dvh] flexh z-2'>
+    <div className={`h-screen w-full z-2 flex ${isWiderOrLonger ? 'flex-row' : 'flex-col'} align-center justify-center overflow-hidden`}>
       {/* Left side */}
-      <div className='w-auto relative grow-0'>
+      <div className='relative flex-1 h-full'>
         {/* Patio image */}
-        <img src={patio} className='h-[100dvh] w-auto' />
+        <img src={patio} className='absolute inset-0 w-full h-full object-cover' alt='patio image'/>
 
         {/* text and note image */}
-        <div className='absolute inset-0 flexh'>
-          <img src={note} className='h-[45dvh] w-auto'/>
+        <div className='absolute inset-0 flex items-center justify-center'>
+          <img src={note} className='w-[70%] h-auto' alt='note pad'/>
 
-          <div className='absolute text-center flex-col italic text-[42px] text-navy-blue'>
-            <div className='-mb-7'>
+          <div className='absolute text-center flex-col italic text-lg xl:text-4xl text-navy-blue'>
+            <div className='-mb-1'>
               Hey! I'm
             </div>
 
-            <div className='text-[72px] not-italic font-bold'>
+            <div className='text-5xl xl:text-6xl 2xl:text-7xl not-italic font-bold'>
               May Yan 
             </div>
           </div>
@@ -31,21 +30,20 @@ const About = (props: Props) => {
       </div>
 
       {/* Right side */}
-      <div className='w-auto bg-cream h-full grow-1 flexh'>
-        <div className='w-[45dvw]'>
-          <div className='text-blue text-[52px] italic'>
+      <div className='flex-1 bg-cream h-full p-6 md:p-14'>
+        <div className='w-full flex flex-col justify-center  h-full'>
+          <div className={`text-blue ${isWiderOrLonger ? '' : 'text-center'} text-3xl xl:text-6xl 2xl:text-6xl italic font-bold`}>
             About Me
           </div>
 
-          <div className='font-inter font-medium text-[18px] text-navy-blue my-4'>
+          <div className={`font-inter font-medium ${isWiderOrLonger ? '' : 'text-center'} text-sm md:text-lg xl:text-lg text-navy-blue mt-2 md:mt-6`}>
             Hi! I'm a third year Software Engineering Student at McMaster University. I love picking up new tools and obsessing over new projects. 
-            I enjoy working with Java, JavaScript and React, and im currently diving into C# and game development. 
-            As a highly passionate and curious individual, i'm eager to continue developing my skills and a career in technology. 
-            Aside from software, some things I have a passion are scattered across this page like reading an enrapturing book, all sorts of board games, video games, and the colour navy. 
+            I enjoy working with Python, JavaScript and React, something I'm trying to learn more about is C++. 
+            Some other things I have a passion for are scattered across this page like reading an enrapturing book, all sorts of board games, video games, and the colour navy. 
           </div>
 
-          <div className='inline-block'>
-            <p className='font-inter italic text-center bg-blue rounded-sm p-1 my-4 text-[16px]'>
+          <div className={`${isWiderOrLonger ? 'inline-block ' : 'flex flex-col justify-center items-center'}`}>
+            <p className='font-inter italic text-center bg-blue rounded-sm p-1 my-4 lg:my-4 text-xs md:text-sm xl:text-sm w-full'>
               Find me here!
             </p>
 
@@ -58,7 +56,7 @@ const About = (props: Props) => {
                 <SiGithub size="40px" className='mx-4 hover:text-blue'/>
               </a>
 
-              <a href="src\Files\May_Resume2025.pdf" target='_blank'>
+              <a href="src\Files\May_Resume2026.pdf" target='_blank'>
                 <BsFileEarmarkPerson size="40px" className='mx-4 hover:text-blue'/>
               </a>
             </div>

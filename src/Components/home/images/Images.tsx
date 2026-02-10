@@ -1,14 +1,14 @@
 import lily from '../../../Assets/lily.png'
 import cd from '../../../Assets/kidKrow.png'
 import jili from '../../../Assets/jili.png'
-import globe from '../../../Assets/globe.jpg'
+import globe from '../../../Assets/globe.png'
 import cruelPrince from '../../../Assets/cruelPrince.png'
 import berry2 from '../../../Assets/berry2.png'
 import berry3 from '../../../Assets/berry3.png'
 import berry4 from '../../../Assets/berry3.png'
-import dice from '../../../Assets/dice.jpg'
-import smiski from '../../../Assets/smiski.jpg'
-import smiski2 from '../../../Assets/smiski2.jpg'
+import dice from '../../../Assets/dice.png'
+import smiski from '../../../Assets/smiski.png'
+import smiski2 from '../../../Assets/smiski2.png'
 import bow from '../../../Assets/bow.png'
 import button from '../../../Assets/button.png'
 import mouse from '../../../Assets/mouse.png'
@@ -22,59 +22,72 @@ import cheesecake from '../../../Assets/cheesecake.png'
 import jewel from '../../../Assets/jewel.png'
 import thread from '../../../Assets/thread.png'
 import hat from '../../../Assets/hat.png'
-import lilyOfTheValley from '../../../Assets/lilyOfTheValley.jpg'
-import watermelon from '../../../Assets/watermelon.jpg'
-import pen from '../../../Assets/pen.jpg'
-import machineFoot from '../../../Assets/machineFoot.jpg'
+import lilyOfTheValley from '../../../Assets/lilyOfTheValley.png'
+import watermelon from '../../../Assets/watermelon.png'
+import pen from '../../../Assets/pen.png'
+import machineFoot from '../../../Assets/machineFoot.png'
 import ace from '../../../Assets/ace.jpg'
 import card from '../../../Assets/card.png'
+import seal from '../../../Assets/seal.png'
 
-type Props = {}
+const size = {
+  xs: `w-[4vw] min-w-[60px] max-w-[90px]`,
+  sm: 'w-[6vw] min-w-[70px] max-w-[140px]',
+  md: 'w-[8vw] min-w-[80px] max-w-[200px]',
+  lg: 'w-[11vw] min-w-[100px] max-w-[300px]',
+  xl: 'w-[14vw] min-w-[150px] max-w-[420px]',
+}
 
-const Images = (props: Props) => {
+const Images = () => {
   return (
-    <div className='absolute top-0 h-full w-full pointer-events-none'>
-      <div className='fade-2'>
-        <img src={watermelon} className='absolute w-[140px] h-auto bottom-[30px] left-[200px] rotate-70' />
-        <img src={lily} className='absolute w-[220px] h-auto bottom-[200px] right-[280px]' />
-        <img src={dice} className='absolute w-[60px] h-auto top-[40px] right-[150px] -rotate-90' />
-        <img src={mouse} className='absolute w-[150px] h-auto top-[20px] left-[710px]' />
-        <img src={cheesecake} className='absolute w-[240px] h-auto left-[210px] bottom-[290px]' />
-        <img src={smiski} className='absolute w-[80px] h-auto top-[10px] right-[600px]' />
-        <img src={smiski2} className='absolute w-[140px] h-auto bottom-[10px] right-[770px] ' />
-        <img src={machineFoot} className='absolute w-[70px] h-auto bottom-[20px] left-[90px]' />
+    <div className="absolute inset-0 overflow-hidden">
+      {/* FADE 2 */}
+      <div className="fade-2">
+        <img src={watermelon} className={`hidden md:block md:absolute ${size.md} bottom-[8%] left-[12%] rotate-[70deg] `} alt='watermelon'/>
+        <img src={lily} className={`absolute ${size.xl} bottom-[3%] md:bottom-[25%] right-[0%] md:right-[18%] transition-transform duration-400 hover:rotate-360`} alt='lily' />
+        <img src={dice} className={`absolute ${size.xs} md:top-[5%] right-[15%] -rotate-90`} alt='dice'/>
+        <img src={mouse} className={`hidden md:block md:absolute ${size.md} top-[4%] left-[52%] transition-transform duration-300 hover:rotate-360`} alt='mouse' />
+        <img src={cheesecake} className={`hidden md:block md:absolute ${size.xl} bottom-[35%] left-[15%]`} alt='cheesecake' />
+        <img src={smiski} className={`absolute ${size.xs} top-[2%] right-[50%] transition-transform duration-300 hover:rotate-360`} alt='smiski' />
+        <img src={smiski2} className={`hidden md:block md:absolute ${size.md} bottom-[4%] right-[58%] transition-transform duration-300 hover:rotate-360`} alt='smiski2' />
+        <img src={machineFoot} className={`hidden md:block md:absolute ${size.xs} bottom-[4%] left-[4%]`} alt='sewing machine foot'/>
       </div>
 
-      <div className='fade-3'>
-        <img src={ace} className='absolute w-[70px] h-auto left-[190px] bottom-[250px] -rotate-20' />
-        <img src={blackCat} className='absolute w-[170px] h-auto left-[360px] bottom-[50px]' />
-        <img src={globe} className='absolute w-[250px] h-auto bottom-[15px] right-[30px]' />
-        <img src={lilyOfTheValley} className='absolute w-[90px] h-auto bottom-[320px] left-[90px]' />
-        <img src={bowl} className='absolute w-[240px] h-auto left-[250px] top-[0px]' />
-        <img src={bow} className='absolute w-[130px] h-auto bottom-[25px] right-[460px] rotate-20' />
-        <img src={cd} className='absolute w-[190px] h-auto top-[20px] right-[280px]' />
+      {/* FADE 3 */}
+      <div className="fade-3">
+        <img src={ace} className={`absolute ${size.xs} left-[39%] md:left-[15%] bottom-[25%] md:bottom-[28%] -rotate-20`} alt="ace card" />
+        <img src={blackCat} className={`absolute ${size.lg} md:left-[23%] left-[8%] bottom-[1%]`} alt='black cat'/>
+        <img src={globe} className={`hidden md:block md:absolute ${size.xl} bottom-[2%] right-[0%]`} alt='globe'/>
+        <img src={lilyOfTheValley} className={`hidden md:block md:absolute ${size.sm} bottom-[45%] left-[8%] transition-transform duration-300 hover:rotate-360`} alt='lily of the valley'/>
+        <img src={bowl} className={`hidden md:block md:absolute ${size.xl} top-[2%] left-[17%]`} alt='bowl'/>
+        <img src={bow} className={`absolute ${size.md} bottom-[12%] md:bottom-[4%] right-[36%] rotate-20`} alt='bow'/>
+        <img src={cd} className={`absolute ${size.lg} top-[20%] md:top-[5%] right-[50%] md:right-[22%]`} alt='cd'/>
+        <img src={seal} className={`hidden md:block md:absolute ${size.sm} top-[45%] right-[2%] rotate-20`} alt='seal'/>
       </div>
 
-      <div className='fade-4'>
-        <img src={berry} className='absolute w-[50px] h-auto left-[780px] bottom-[75px]' />
-        <img src={berry4} className='absolute w-[80px] h-auto right-[480px] top-[20px] -rotate-20' />
-        <img src={berry2} className='absolute w-[50px] h-auto top-[390px] right-[60px]' />
-        <img src={button} className='absolute w-[135px] h-auto top-[20px] right-[700px] rotate-20' />
-        <img src={berry3} className='absolute w-[80px] h-auto top-[20px] left-[50px]' />
-        <img src={puzzle2} className='absolute w-[60px] h-auto bottom-[60px] right-[650px] rotate-5' />
-        <img src={tea} className='absolute w-[140px] h-auto left-[590px] bottom-[10px]' />  
-        <img src={card} className='absolute w-[40px] h-auto right-[180px] bottom-[320px] rotate-20' />  
+      {/* FADE 4 */}
+      <div className="fade-4">
+        <img src={berry} className={`hidden md:block md:absolute ${size.xs} right-[27%] bottom-[6%]`} alt='blueberry1' />
+        <img src={berry4} className={`absolute ${size.xs} right-[35%] top-[10%] -rotate-20`} alt='blueberry2'/>
+        <img src={berry2} className={`hidden md:block md:absolute ${size.xs} top-[45%] right-[10%]`} alt='blueberry3'/>
+        <img src={button} className={`hidden md:block md:absolute ${size.md} top-[8%] right-[52%] rotate-20`} alt='button'/>
+        <img src={berry3} className={`absolute ${size.sm} top-[2%] left-[2%]`} alt='blueberry4'/>
+        <img src={puzzle2} className={`absolute ${size.xs} bottom-[1%] right-[45%] rotate-5`} alt='puzzle piece'/>
+        <img src={tea} className={`hidden md:block md:absolute ${size.md} left-[43%] bottom-[5%]`} alt='tea cup'/>
+        <img src={card} className={`hidden md:block md:absolute ${size.xs} right-[12%] bottom-[30%] rotate-20`} alt='card'/>
       </div>
 
-      <div className='fade-5'>
-        <img src={puzzle} className='absolute w-[90px] h-auto top-[25px] left-[580px] -rotate-30' /> 
-        <img src={jili} className='absolute w-[210px] h-auto bottom-[20px] right-[230px]' />
-        <img src={jewel} className='absolute w-[80px] h-auto left-[430px] top-[280px] -rotate-90' />
-        <img src={hat} className='absolute w-[150px] h-auto left-[30px] bottom-[120px]' />
-        <img src={thread} className='absolute w-[180px] h-auto left-[60px] top-[60px] rotate-20' />   
-        <img src={cruelPrince} className='absolute w-[250px] h-auto top-[130px] right-[070px]' />
-        <img src={pen} className='absolute w-[120px] h-auto top-[70px] right-[10px]' />   
+      {/* FADE 5 */}
+      <div className="fade-5">
+        <img src={puzzle} className={`hidden md:block md:absolute ${size.sm} top-[2%] left-[35%] -rotate-30`} alt='puzzle'/>
+        <img src={jili} className={`hidden md:block md:absolute ${size.lg} bottom-[8%] right-[12%] transition-transform duration-300 hover:rotate-360`} alt='jili cat'/>
+        <img src={jewel} className={`absolute ${size.sm} left-[26%] top-[38%] -rotate-90`} alt='jewel'/>
+        <img src={hat} className={`absolute ${size.lg} left-[1%] bottom-[20%] md:bottom-[16%] transition-transform duration-300 hover:rotate-360`} alt='hat'/>
+        <img src={thread} className={`absolute ${size.lg} left-[4%] top-[10%] rotate-40 transition-transform duration-300 hover:rotate-360`} alt='thread'/>
+        <img src={cruelPrince} className={`absolute ${size.xl} top-[15%] right-[6%]`} alt='cruel prince book'/>
+        <img src={pen} className={`absolute ${size.md} top-[4%] right-[1%]`} alt='pen'/>
       </div>
+
     </div>
   )
 }
