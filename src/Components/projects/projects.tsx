@@ -86,7 +86,7 @@ const projects = () => {
             </p>
 
             <p className="font-inter font-medium text-[12px] xxl:text-md text-navy-blue">
-              Built with React, Tailwind CSS, and Vite, this responsive portfolio website showcases my projects and skills in a visually appealing, and user-friendly way.
+              Built with React TypeScript, Tailwind CSS, and Vite, this responsive portfolio website showcases my projects and skills in a visually appealing, and user-friendly way.
             </p>
           </div>
         </div>
