@@ -1,21 +1,80 @@
-import note from '/Assets/note.png'
-import patio from '/Assets/patio.jpg'
+import note from '/assets/note.png'
+import pin from '/assets/pin.png'
 import { FaLinkedin } from "react-icons/fa";
 import { SiGithub } from "react-icons/si";
 import { BsFileEarmarkPerson } from "react-icons/bs";
+import { useEffect, useRef, useState } from 'react';
+
+const Note = () => {
+  const noteRef = useRef<HTMLImageElement>(null);
+  const [isNoteVisible, setIsNoteVisible] = useState(false);
+
+  useEffect(() => {
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      const [ entry ] = entries;  
+      if (entry.isIntersecting && entry.target === noteRef.current) {
+        setIsNoteVisible(true);
+      }
+    };
+
+    const noteObserver = new IntersectionObserver(callback, {
+      threshold: [0.2],
+    });
+
+    if (noteRef.current) noteObserver.observe(noteRef.current);
+
+    return () => {
+      if (noteRef.current) noteObserver.disconnect();
+    };
+  }, [])
+
+  return (
+    <>
+      <img src={note} ref={noteRef} className={`w-full h-auto transition-transform duration-900 ease-out transform ${isNoteVisible ? "scale-100 opacity-100" : "scale-120 opacity-0"}`} alt='note pad'/>
+    </>
+  )
+}
+
+const Pin = () => {
+  const pinRef = useRef<HTMLImageElement>(null);
+  const [isPinVisible, setIsPinVisible] = useState(false);
+  
+  useEffect(() => {
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      const [ entry ] = entries;
+      if (entry.isIntersecting && entry.target === pinRef.current) {
+        setIsPinVisible(true);
+      }
+    };
+
+    const pinObserver = new IntersectionObserver(callback, {
+      threshold: [0.7],
+    });
+    if (pinRef.current) pinObserver.observe(pinRef.current);
+    return () => {
+      if (pinRef.current) pinObserver.disconnect();
+    }
+  }, [])
+
+  return (
+    <img src={pin} ref = {pinRef} className={`absolute w-[12%] h-auto top-[-4%] left-[46%] rotate-12 transition-transform duration-600 ease-out transform ${isPinVisible ? "scale-100 opacity-100" : "scale-700 opacity-0"}`} alt='pin'/>
+  )
+}
 
 const About = () => {
   const isWiderOrLonger = window.innerWidth > window.innerHeight;
+
   return (
-    <div className={`h-screen w-full z-2 flex ${isWiderOrLonger ? 'flex-row' : 'flex-col'} align-center justify-center overflow-hidden`}>
+    <div className={`h-screen w-full z-2 flex ${isWiderOrLonger ? 'flex-row' : 'flex-col'} align-center justify-center`}>
       {/* Left side */}
       <div className='relative flex-1 h-full'>
-        {/* Patio image */}
-        <img src={patio} className='absolute inset-0 w-full h-full object-cover' alt='patio image'/>
-
         {/* text and note image */}
         <div className='absolute inset-0 flex items-center justify-center'>
-          <img src={note} className='w-[70%] h-auto' alt='note pad'/>
+          <div className='w-[80%] h-auto relative'>
+            <Note />
+
+            <Pin />
+          </div>
 
           <div className='absolute text-center flex-col italic text-lg xl:text-4xl text-navy-blue'>
             <div className='-mb-1'>
@@ -30,7 +89,7 @@ const About = () => {
       </div>
 
       {/* Right side */}
-      <div className='flex-1 bg-cream h-full p-6 md:p-14'>
+      <div className='flex-1 h-full p-6 md:p-14'>
         <div className='w-full flex flex-col justify-center  h-full'>
           <div className={`text-blue ${isWiderOrLonger ? '' : 'text-center'} text-3xl xl:text-6xl 2xl:text-6xl italic font-bold`}>
             About Me
@@ -56,7 +115,7 @@ const About = () => {
                 <SiGithub size="40px" className='mx-4 hover:text-blue'/>
               </a>
 
-              <a href="/Files/May_Resume2026.pdf" target='_blank'>
+              <a href="/files/May_Resume2026.pdf" target='_blank'>
                 <BsFileEarmarkPerson size="40px" className='mx-4 hover:text-blue'/>
               </a>
             </div>

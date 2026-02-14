@@ -1,11 +1,11 @@
-import folder from "/Assets/blueFolder.png"
-import postcard from "/Assets/postcard.png"
-import note2 from "/Assets/note2.png"
-import reciept from "/Assets/reciept.png"
-import paper from "/Assets/paper.png"
+import folder from "/assets/blueFolder.png"
+import postcard from "/assets/postcard.png"
+import note2 from "/assets/note2.png"
+import reciept from "/assets/reciept.png"
+import paper from "/assets/paper.png"
 import { useEffect, useState } from "react"
-import lily from "/Assets/lily.png"
-import orchid from "/Assets/orchid.png"
+import lily from "/assets/lily.png"
+import orchid from "/assets/orchid.png"
 
 const projects = () => {
   const [cardsClicked, setCardsClicked] = useState(false);
@@ -20,7 +20,7 @@ const projects = () => {
   }, [movement])
 
   return (
-    <div className="bg-blue h-screen w-full flex flex-col items-center justify-end overflow-hidden relative">
+    <div className="h-screen w-full flex flex-col items-center justify-end overflow-hidden relative">
       {/* Folder and papers */}
       <div className="relative h-2/6 md:h-2/5 w-auto lg:w-3/10 lg:h-auto mb-2">
         {/* Folder image*/}
