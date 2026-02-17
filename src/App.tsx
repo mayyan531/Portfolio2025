@@ -1,6 +1,6 @@
 import Folder from "./Components/home/folder/Folder"
 import Header from "./Components/header/Header";
-import About from "./Components/about/About";
+import AboutV2 from "./Components/about/AboutV2";
 import Projects from "./Components/projects/Projects";
 import Scroll from "./Components/scroll/Scroll";
 
@@ -19,8 +19,8 @@ function App() {
           <Header />
         </div>
 
-        <div className="bg-gradient-to-b from-cream from-50% to-blue">
-          <About />
+        <div className="bg-gradient-to-b from-cream to-blue">
+          <AboutV2 />
 
           <Projects />
         </div>
