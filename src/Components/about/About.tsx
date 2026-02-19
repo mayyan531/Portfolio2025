@@ -1,5 +1,5 @@
-import note from '/Assets/note.png'
-import patio from '/Assets/patio.jpg'
+import note from '/assets/note.png'
+import patio from '/assets/patio.jpg'
 import { FaLinkedin } from "react-icons/fa";
 import { SiGithub } from "react-icons/si";
 import { BsFileEarmarkPerson } from "react-icons/bs";
@@ -30,7 +30,7 @@ const About = () => {
       </div>
 
       {/* Right side */}
-      <div className='flex-1 bg-cream h-full p-6 md:p-14'>
+      <div className='flex-1 h-full p-6 md:p-14'>
         <div className='w-full flex flex-col justify-center  h-full'>
           <div className={`text-blue ${isWiderOrLonger ? '' : 'text-center'} text-3xl xl:text-6xl 2xl:text-6xl italic font-bold`}>
             About Me
@@ -56,7 +56,7 @@ const About = () => {
                 <SiGithub size="40px" className='mx-4 hover:text-blue'/>
               </a>
 
-              <a href="/Files/May_Resume2026.pdf" target='_blank'>
+              <a href={`${import.meta.env.BASE_URL}files/May_Resume2026.pdf`} target='_blank' rel="noopener noreferrer">
                 <BsFileEarmarkPerson size="40px" className='mx-4 hover:text-blue'/>
               </a>
             </div>

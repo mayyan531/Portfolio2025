@@ -7,7 +7,7 @@ import Scroll from "./Components/scroll/Scroll";
 function App() {
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full bg-cream">
       <div className="absolute bottom-0 top-0">
         <Scroll />
       </div>
@@ -19,9 +19,11 @@ function App() {
           <Header />
         </div>
 
-        <About />
+        <div className="bg-gradient-to-b from-cream to-blue from-[40%]">
+          <About />
 
-        <Projects />
+          <Projects />
+        </div>
       </div>
     </div>
   )
