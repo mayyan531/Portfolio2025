@@ -1,5 +1,6 @@
 import note from '/assets/note.png'
 import pin from '/assets/pin.png'
+import patio from '/assets/patio.jpg'
 import { FaLinkedin } from "react-icons/fa";
 import { SiGithub } from "react-icons/si";
 import { BsFileEarmarkPerson } from "react-icons/bs";
@@ -115,7 +116,7 @@ const About = () => {
                 <SiGithub size="40px" className='mx-4 hover:text-blue'/>
               </a>
 
-              <a href="/files/May_Resume2026.pdf" target='_blank'>
+              <a href={`${import.meta.env.BASE_URL}files/May_Resume2026.pdf`} target='_blank' rel="noopener noreferrer">
                 <BsFileEarmarkPerson size="40px" className='mx-4 hover:text-blue'/>
               </a>
             </div>
