@@ -20,7 +20,7 @@ const Projects = () => {
   }, [])
 
   return (
-    <div className=" h-screen w-full flex flex-col items-center justify-end overflow-hidden relative">
+    <div className="h-screen w-full flex flex-col items-center justify-end overflow-hidden relative">
       {/* Folder and papers */}
       <div className="relative h-2/6 md:h-2/5 w-auto lg:w-3/10 lg:h-auto mb-2">
         {/* Folder image*/}

@@ -1,13 +1,13 @@
 import Folder from "./Components/home/folder/Folder"
 import Header from "./Components/header/Header";
-import About from "./Components/about/About";
+import AboutV2 from "./Components/about/AboutV2";
 import Projects from "./Components/projects/Projects";
 import Scroll from "./Components/scroll/Scroll";
 
 function App() {
 
   return (
-    <div className="relative w-full bg-cream">
+    <div className="relative w-full select-none drag-none">
       <div className="absolute bottom-0 top-0">
         <Scroll />
       </div>
