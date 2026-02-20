@@ -21,11 +21,13 @@ type GLTFResult = GLTF & {
     linkedin: THREE.Mesh
     Envelope001: THREE.Mesh
     Envelope002: THREE.Mesh
+    Circle: THREE.Mesh
   }
   materials: {
     inner: THREE.MeshStandardMaterial
     outer: THREE.MeshStandardMaterial
     card: THREE.MeshStandardMaterial
+    Material: THREE.MeshStandardMaterial
   }
   animations: GLTFAction[]
 }
@@ -43,6 +45,7 @@ export function Model(props: JSX.IntrinsicElements['group']) {
       <mesh geometry={nodes.linkedin.geometry} material={materials.card} />
       <mesh geometry={nodes.Envelope001.geometry} material={materials.outer} />
       <mesh geometry={nodes.Envelope002.geometry} material={materials.outer} position={[0.01, 0, 0]} />
+      <mesh geometry={nodes.Circle.geometry} material={materials.Material} position={[0.014, -0.266, 0]} rotation={[0.974, 0, -Math.PI / 2]} scale={[0.176, 0.172, 0.176]} />
       <mesh geometry={nodes.Plane.geometry} material={materials.inner} />
       <mesh geometry={nodes.Plane_1.geometry} material={materials.outer} />
       <mesh geometry={nodes.Plane003.geometry} material={materials.card} />
