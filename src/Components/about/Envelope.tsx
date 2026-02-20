@@ -4,9 +4,12 @@ Command: npx gltfjsx@6.5.3 envelope.glb -t
 */
 
 import * as THREE from 'three'
-import { type JSX } from 'react'
+import { useEffect, useRef, useState, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import type { GLTF } from 'three-stdlib'
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import type { ThreeEvent } from '@react-three/fiber';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -19,36 +22,145 @@ type GLTFResult = GLTF & {
     github: THREE.Mesh
     resume: THREE.Mesh
     linkedin: THREE.Mesh
+    Envelope001: THREE.Mesh
+    Envelope002: THREE.Mesh
+    Circle: THREE.Mesh
   }
   materials: {
-    inner: THREE.MeshPhysicalMaterial 
-    outer: THREE.MeshPhysicalMaterial 
-    card: THREE.MeshPhysicalMaterial 
+    inner: THREE.MeshStandardMaterial
+    outer: THREE.MeshStandardMaterial
+    card: THREE.MeshStandardMaterial
+    Material: THREE.MeshStandardMaterial
   }
 }
 
 export function Envelope(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/Portfolio2025/envelope.glb') as unknown as GLTFResult
+  const flapRef = useRef<THREE.Group>(null);
+  const groupRef = useRef<THREE.Group>(null);
+  const noteRef = useRef<THREE.Mesh>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [noteOut, setNoteOut] = useState(false);
+  const githubRef = useRef<THREE.Mesh>(null);
+
+  const { contextSafe } = useGSAP({ scope: groupRef });
+  let isSmallScreen = window.innerWidth > 1280 ? false : true;
+
+  useEffect(() => {
+    const texture = new THREE.TextureLoader().load('/Portfolio2025/assets/aboutCard.png');
+    texture.flipY = false;
+    texture.anisotropy = 0;
+    texture.magFilter = THREE.NearestFilter;
+    texture.minFilter = THREE.NearestFilter;
+    texture.colorSpace = THREE.SRGBColorSpace;
+    materials.card.map = texture;
+    
+    const texture2 = new THREE.TextureLoader().load('/Portfolio2025/assets/innerTexture.jpg');
+    texture2.flipY = false;
+    texture2.anisotropy = 0;
+    texture2.magFilter = THREE.NearestFilter;
+    texture2.minFilter = THREE.NearestFilter;
+    texture2.colorSpace = THREE.SRGBColorSpace;
+    materials.inner.map = texture2;
+
+    const texture3 = new THREE.TextureLoader().load('/Portfolio2025/assets/outerTexture.png');
+    texture3.flipY = false;
+    texture3.anisotropy = 0;
+    texture3.magFilter = THREE.NearestFilter;
+    texture3.minFilter = THREE.NearestFilter;
+    texture3.colorSpace = THREE.SRGBColorSpace;
+    materials.outer.map = texture3;
+  }, [])
+
+
+  const handleFlapClick = contextSafe((e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+
+    if (flapRef.current) {
+      if (isOpen && !noteOut) {
+        gsap.to(flapRef.current.rotation, { z: 0.2, duration: 0.6, ease: "power2.out" }).then(() => {
+          setIsOpen(false);
+        });
+      } else {
+        gsap.to(flapRef.current.rotation, { z: Math.PI, duration: 0.6, ease: "power2.out" })
+        setIsOpen(true);
+      }
+    }
+  });
+
+  const handleFlapHover = contextSafe((e: ThreeEvent<MouseEvent>, entering: boolean) => {
+    e.stopPropagation();  
+    if (flapRef.current) {
+      if (entering && !isOpen) {
+        gsap.to(flapRef.current.rotation, { z: flapRef.current.rotation.z + 0.1, duration: 0.3, ease: "power2.out" });
+      } else if (!entering && !isOpen) {
+        gsap.to(flapRef.current.rotation, { z: flapRef.current.rotation.z - 0.1, duration: 0.3, ease: "power2.out" });
+      }
+    }
+  });
+
+  const onCardClick = contextSafe((e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+    if (noteRef.current && groupRef.current && isOpen) {
+      if (noteOut) {
+        gsap.to(noteRef.current.position, { y: -0.8, duration: 0.4, ease: "power2.out" }).then(() => {
+          setNoteOut(false);
+        });
+
+        if (!isSmallScreen) {
+          gsap.to(groupRef.current.position, { y: -1, duration: 0.4, ease: "power2.out" });
+        }
+      } else {
+        gsap.to(noteRef.current.position, { y: 0.3, duration: 0.4, ease: "power2.out" });
+        if (!isSmallScreen) {
+          gsap.to(groupRef.current.position, { y: -2.5, duration: 0.4, ease: "power2.out" });
+        }
+        setNoteOut(true);
+      }
+    }
+  });
+
+  const handleCardHover = contextSafe((e: ThreeEvent<MouseEvent>, entering: boolean) => {
+    e.stopPropagation();
+    if (noteRef.current) {
+      if (entering && !noteOut && isOpen) {
+        gsap.to(noteRef.current.position, { y: -0.7, duration: 0.3, ease: "power2.out" });
+      } else if (!entering && !noteOut && isOpen) {
+        gsap.to(noteRef.current.position, { y: -0.8, duration: 0.3, ease: "power2.out" });
+      }
+    }
+  });
+
+  const onLinkClick = contextSafe((e: ThreeEvent<MouseEvent>, url: string) => {
+    e.stopPropagation();
+    window.open(url, '_blank');
+  });
+
   return (
-    <group {...props} dispose={null} scale={2.5} rotation={[Math.PI/2, -Math.PI/2, Math.PI/2 ]} position={[0, -1, 0]}>
+    <group {...props} dispose={null} scale={isSmallScreen ? 1.6 : 3} rotation={[Math.PI/2, isSmallScreen ? -Math.PI/2 : -Math.PI/2 - 0.1, Math.PI/2]} position={[0, isSmallScreen ? -2 : -1 , 0]} ref={groupRef}>
       {/* Flap */}
-      <group position={[-0.003, 0.707, 0.01]} rotation={[0, 0, Math.PI/1]}>
+      <group position={[-0.003, 0.707, 0.01]} rotation={[0, 0, 0.2]} ref={flapRef} onClick={(e) => handleFlapClick(e)} onPointerEnter={(e) => handleFlapHover(e, true)} onPointerLeave={(e) => handleFlapHover(e, false)}>
         <mesh geometry={nodes.Plane001.geometry} material={materials.inner} />
         <mesh geometry={nodes.Plane001_1.geometry} material={materials.outer} />
+        <mesh geometry={nodes.Circle.geometry} material={materials.Material} position={[0.1, -1, 0]} rotation={[0.974, 0, -Math.PI / 2]} scale={[0.176, 0.172, 0.176]} />
       </group>
 
       {/* Card */}
-      <group position={[0, -0.8, 0]} >
-        <mesh geometry={nodes.github.geometry} material={materials.card} />
-        <mesh geometry={nodes.resume.geometry} material={materials.card} />
-        <mesh geometry={nodes.linkedin.geometry} material={materials.card} />
+      <group position={[0, -0.8, 0]} scale={1.05} ref={noteRef} onClick={(e) => onCardClick(e)} onPointerEnter={(e) => handleCardHover(e, true)} onPointerLeave={(e) => handleCardHover(e, false)}>
+        <mesh geometry={nodes.github.geometry} ref={githubRef} material={materials.card} onPointerEnter={() => { document.body.style.cursor = 'pointer'; }} onPointerLeave={() => { document.body.style.cursor = 'default'; }} onClick={(e) => onLinkClick(e, 'https://github.com/mayyan531')} />
+        <mesh geometry={nodes.resume.geometry} material={materials.card} onPointerEnter={() => { document.body.style.cursor = 'pointer'; }} onPointerLeave={() => { document.body.style.cursor = 'default'; }} onClick={(e) => onLinkClick(e, `${import.meta.env.BASE_URL}files/May_Resume2026.pdf`)} />
+        <mesh geometry={nodes.linkedin.geometry} material={materials.card} onPointerEnter={() => { document.body.style.cursor = 'pointer'; }} onPointerLeave={() => { document.body.style.cursor = 'default'; }} onClick={(e) => onLinkClick(e, 'https://www.linkedin.com/in/yanm34/')} />
         <mesh geometry={nodes.Plane003.geometry} material={materials.card} />
         <mesh geometry={nodes.Plane003_1.geometry} material={materials.outer} />        
       </group>
 
       {/* Envelope body */}
-      <mesh geometry={nodes.Plane.geometry} material={materials.inner} />
-      <mesh geometry={nodes.Plane_1.geometry} material={materials.outer} />
+      <group onClick={(e) => e.stopPropagation()} onPointerEnter={(e) => e.stopPropagation()} onPointerLeave={(e) => e.stopPropagation()}>
+        <mesh geometry={nodes.Envelope001.geometry} material={materials.outer} />
+        <mesh geometry={nodes.Envelope002.geometry} material={materials.outer} position={[0.01, 0, 0]} />
+        <mesh geometry={nodes.Plane.geometry} material={materials.inner} />
+        <mesh geometry={nodes.Plane_1.geometry} material={materials.outer} />
+      </group>
     </group>
   )
 }

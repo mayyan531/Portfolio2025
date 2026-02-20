@@ -107,7 +107,7 @@ const About = () => {
             </p>
 
             <div className='flex'>
-              <a href='https://www.linkedin.com/in/yanm34/' target='_blank'>
+              <a href='/files/May_Resume2026.pdf' target='_blank'>
                 <FaLinkedin size="40px" className='mx-4 hover:text-blue' />
               </a>
 

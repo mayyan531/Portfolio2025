@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import lily from "/assets/lily.png"
 import orchid from "/assets/orchid.png"
 
-const projects = () => {
+const Projects = () => {
   const [cardsClicked, setCardsClicked] = useState(false);
   const [movement, setMovement] = useState(false);
 
@@ -107,4 +107,4 @@ const projects = () => {
   )
 }
 
-export default projects
+export default Projects
