@@ -20,7 +20,7 @@ function App() {
         </div>
 
         <div className="bg-gradient-to-b from-cream to-blue from-[40%]">
-          <About />
+          <AboutV2 />
 
           <Projects />
         </div>

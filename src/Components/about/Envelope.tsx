@@ -137,7 +137,7 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
   });
 
   return (
-    <group {...props} dispose={null} scale={isSmallScreen ? 1.6 : 3} rotation={[Math.PI/2, isSmallScreen ? -Math.PI/2 : -Math.PI/2 - 0.1, Math.PI/2]} position={[0, isSmallScreen ? -2 : -1 , 0]} ref={groupRef}>
+    <group {...props} dispose={null} scale={isSmallScreen ? 1.6 : 3} rotation={[Math.PI/2, isSmallScreen ? -Math.PI/2 : -Math.PI/2 - 0.1, Math.PI/2]} position={[0, -1 , 0]} ref={groupRef}>
       {/* Flap */}
       <group position={[-0.003, 0.707, 0.01]} rotation={[0, 0, 0.2]} ref={flapRef} onClick={(e) => handleFlapClick(e)} onPointerEnter={(e) => handleFlapHover(e, true)} onPointerLeave={(e) => handleFlapHover(e, false)}>
         <mesh geometry={nodes.Plane001.geometry} material={materials.inner} />

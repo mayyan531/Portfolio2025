@@ -1,6 +1,5 @@
 import note from '/assets/note.png'
 import pin from '/assets/pin.png'
-import patio from '/assets/patio.jpg'
 import { FaLinkedin } from "react-icons/fa";
 import { SiGithub } from "react-icons/si";
 import { BsFileEarmarkPerson } from "react-icons/bs";
