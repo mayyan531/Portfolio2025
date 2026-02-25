@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.5.3 folder.glb -t
 import * as THREE from 'three'
 import { useGLTF } from '@react-three/drei'
 import type { GLTF } from 'three-stdlib'
-import { useEffect, useRef, useState, type JSX } from 'react'
+import { memo, useEffect, useRef, useState, type JSX } from 'react'
 import type { ThreeEvent } from '@react-three/fiber'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap';
@@ -27,17 +27,24 @@ type GLTFResult = GLTF & {
   }
 }
 
-export function FolderModel(props: JSX.IntrinsicElements['group']) {
+interface Props{
+  onTextureLoaded: () => void;
+  onFirstTimeOpen: () => void;
+}
+
+function FolderModel({ onTextureLoaded, onFirstTimeOpen, ...props }: JSX.IntrinsicElements['group'] & Props) {
   const { nodes, materials } = useGLTF('/Portfolio2025/folder.glb') as unknown as GLTFResult
 
   let isSmallScreen = window.innerWidth > 1280 ? false : true;
 
   const groupRef = useRef<THREE.Group>(null);
   const frontRef = useRef<THREE.Mesh>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const { contextSafe } = useGSAP({ scope: groupRef });
 
   const [frontOpen, setFrontOpen] = useState(false);
+  const [firstTimeOpen, setFirstTimeOpen] = useState(false);
 
   useEffect(() => {
     const texture = new THREE.TextureLoader().load('/Portfolio2025/assets/folderPaper.jpg');
@@ -55,12 +62,51 @@ export function FolderModel(props: JSX.IntrinsicElements['group']) {
     texture2.minFilter = THREE.NearestFilter;
     texture2.colorSpace = THREE.SRGBColorSpace;
     materials.mainPaper.map = texture2;
+
+    onTextureLoaded();
   }, [])
+
+  useEffect(() => {
+    if (!frontRef.current) return
+
+    if (!firstTimeOpen) {
+      intervalRef.current = setInterval(() => {
+        console.log("animating")
+        gsap.timeline()
+        .to(frontRef.current!.rotation, {
+          x: 0.05,
+          duration: 0.4
+        })
+        .to(frontRef.current!.rotation, {
+          x: 0,
+          duration: 0.4,
+          delay: 0.75
+        })
+      }, 1500)
+    }
+    else {
+      console.log("clearing interval")
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }, [firstTimeOpen])
 
   const onFrontClick = contextSafe((e:ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
-
-    console.log('clicked front');
+    
+    if (!firstTimeOpen) {
+      setFirstTimeOpen(true);
+      onFirstTimeOpen();
+    }
 
     if (frontRef.current) {
       if (frontOpen) {
@@ -78,7 +124,7 @@ export function FolderModel(props: JSX.IntrinsicElements['group']) {
   const onHover = contextSafe((e: ThreeEvent<MouseEvent>, entering: boolean) => {
     e.stopPropagation();
 
-    if (frontRef.current) {
+    if (frontRef.current && firstTimeOpen) {
       if (entering && !frontOpen) {
         gsap.to(frontRef.current.rotation, { x: 0.05, y: 0, z: 0, duration: 0.2 });
       } else if (!entering && !frontOpen) {
@@ -97,5 +143,7 @@ export function FolderModel(props: JSX.IntrinsicElements['group']) {
     </group>
   )
 }
+
+export default memo(FolderModel)
 
 useGLTF.preload('/Portfolio2025/folder.glb')
