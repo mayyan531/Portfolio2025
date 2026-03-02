@@ -29,22 +29,24 @@ type GLTFResult = GLTF & {
 
 interface Props{
   onTextureLoaded: () => void;
-  onFirstTimeOpen: () => void;
+  onFirstTimeOpened: () => void;
 }
 
-function FolderModel({ onTextureLoaded, onFirstTimeOpen, ...props }: JSX.IntrinsicElements['group'] & Props) {
+function FolderModel({ onTextureLoaded, onFirstTimeOpened, ...props }: JSX.IntrinsicElements['group'] & Props) {
   const { nodes, materials } = useGLTF('/Portfolio2025/folder.glb') as unknown as GLTFResult
 
   let isSmallScreen = window.innerWidth > 1280 ? false : true;
 
   const groupRef = useRef<THREE.Group>(null);
   const frontRef = useRef<THREE.Mesh>(null);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const intervalRef = useRef<number | null>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   const { contextSafe } = useGSAP({ scope: groupRef });
 
   const [frontOpen, setFrontOpen] = useState(false);
-  const [firstTimeOpen, setFirstTimeOpen] = useState(false);
+  const [firstTimeOpened, setFirstTimeOpened] = useState(false);
 
   useEffect(() => {
     const texture = new THREE.TextureLoader().load('/Portfolio2025/assets/folderPaper.jpg');
@@ -69,52 +71,52 @@ function FolderModel({ onTextureLoaded, onFirstTimeOpen, ...props }: JSX.Intrins
   useEffect(() => {
     if (!frontRef.current) return
 
-    if (!firstTimeOpen) {
-      intervalRef.current = setInterval(() => {
-        console.log("animating")
-        gsap.timeline()
-        .to(frontRef.current!.rotation, {
-          x: 0.05,
-          duration: 0.4
-        })
-        .to(frontRef.current!.rotation, {
-          x: 0,
-          duration: 0.4,
-          delay: 0.75
-        })
-      }, 1500)
-    }
-    else {
-      console.log("clearing interval")
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-        intervalRef.current = null
-      }
-    }
+    intervalRef.current = setInterval(() => {
+      console.log("starting animation")
+      timelineRef.current = gsap.timeline()
+      .to(frontRef.current!.rotation, {
+        x: 0.05,
+        duration: 0.4
+      })
+      .to(frontRef.current!.rotation, {
+        x: 0,
+        duration: 0.4,
+        delay: 1.5
+      })
+    },2500)
 
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-        intervalRef.current = null
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (timelineRef.current) timelineRef.current.kill();
+    };
+  }, [frontRef.current])
+
+  useEffect(() => {
+    if (firstTimeOpened){
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (timelineRef.current) timelineRef.current.kill();
+      onFirstTimeOpened();
     }
-  }, [firstTimeOpen])
+  }, [firstTimeOpened, intervalRef])
+
 
   const onFrontClick = contextSafe((e:ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
-    
-    if (!firstTimeOpen) {
-      setFirstTimeOpen(true);
-      onFirstTimeOpen();
+
+    if (!firstTimeOpened) {
+      setFirstTimeOpened(true);
     }
 
     if (frontRef.current) {
       if (frontOpen) {
+        console.log("closing")
         gsap.to(frontRef.current.rotation, { x: 0, duration: 0.8, ease: "power2.out" }).then(() => {
           setFrontOpen(false);
         });
 
       } else {
+        console.log("opening")
+
         gsap.to(frontRef.current.rotation, { x: Math.PI/2 + 1, duration: 0.6, ease: "power2.out" })
         setFrontOpen(true);
       }
@@ -124,7 +126,9 @@ function FolderModel({ onTextureLoaded, onFirstTimeOpen, ...props }: JSX.Intrins
   const onHover = contextSafe((e: ThreeEvent<MouseEvent>, entering: boolean) => {
     e.stopPropagation();
 
-    if (frontRef.current && firstTimeOpen) {
+    console.log("hovering", entering)
+
+    if (frontRef.current && firstTimeOpened) {
       if (entering && !frontOpen) {
         gsap.to(frontRef.current.rotation, { x: 0.05, y: 0, z: 0, duration: 0.2 });
       } else if (!entering && !frontOpen) {
@@ -137,7 +141,7 @@ function FolderModel({ onTextureLoaded, onFirstTimeOpen, ...props }: JSX.Intrins
     <group {...props} dispose={null} rotation={[Math.PI/2, 0, 0]} scale={isSmallScreen ? 0.3 : 0.5} ref={groupRef} onPointerEnter={(e) => onHover(e, true)} onPointerLeave={(e) => onHover(e, false)}>
       <mesh geometry={nodes.back.geometry} material={materials.folder} scale={[1.239, 1, 0.807]} />
       <mesh geometry={nodes.front.geometry} material={materials.folder} position={[0.124, 0.207, 4.18]} ref={frontRef} onClick={(e) => onFrontClick(e)} />
-      <mesh geometry={nodes.mainPaper.geometry} material={materials.mainPaper} position={[0.124, 0.144, 0.082]} scale={[-5.084, -2.142, -3.585]} rotation={[0, 0, 0]}/>
+      <mesh geometry={nodes.mainPaper.geometry} material={materials.mainPaper} position={[0.124, 0.144, 0.082]} scale={[-5.084, -2.142, -3.585]} />
       <mesh geometry={nodes.blueFramed.geometry} material={materials.blueFramed} position={[-1.101, 0.046, -1.337]} rotation={[0, 0.053, 0]} scale={[3.68, 2.629, 2.85]} />
       <mesh geometry={nodes.newspaper.geometry} material={materials.newspaper} position={[0.505, 0.065, -0.785]} scale={[4.909, 1.341, 3.179]} />
     </group>

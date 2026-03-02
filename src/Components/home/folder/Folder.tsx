@@ -14,14 +14,14 @@ const Folder = ({}: Props) => {
     const [loadImages, setLoadImages] = useState(false);
     
   return (
-    <div className={`bg-cream flexh h-screen w-full relative transition-opacity duration-1000 ease-in-out ${textureLoaded ? "opacity-100" : "opacity-0"}`}>
+    <div className={`flexh h-screen w-full relative transition-opacity duration-1000 ease-in-out ${textureLoaded ? "opacity-100" : "opacity-0"}`}>
         {loadImages && <Images />}
 
         <Canvas className="w-full h-full" dpr={4}>            
-            <directionalLight position={[5, 5, 5]} intensity={2} color={0xFFF0C5}/>
-            <ambientLight intensity={2.2} color={0xFFFFFF}/>
+            <directionalLight position={[5, 1, 5]} intensity={3} color={0xFFF0C5}/>
+            <ambientLight intensity={1.5} color={0xFFFFFF}/>
             <Environment files={"/Portfolio2025/suburban_garden_1k.hdr"} environmentIntensity={0.8}/>
-            <FolderModel receiveShadow castShadow onTextureLoaded={() => setTextureLoaded(true)} onFirstTimeOpen={() => {setLoadImages(true)}} /> 
+            <FolderModel receiveShadow castShadow onTextureLoaded={() => setTextureLoaded(true)} onFirstTimeOpened={() => {setLoadImages(true)}} /> 
         </Canvas>
 
 {/*         <div className='h-2/6 w-auto lg:w-3/9 lg:h-auto relative '>

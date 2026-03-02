@@ -35,7 +35,7 @@ function App() {
   }
 
   return (
-    <div className="relative w-full select-none drag-none bg-cream">
+    <div className="inset-0 relative w-full select-none drag-none bg-gradient-to-b from-cream to-blue from-30%">
       <div className="absolute bottom-0 top-0">
         <Scroll />
       </div>
@@ -47,11 +47,11 @@ function App() {
           <Header />
         </div>
 
-        <div className="bg-gradient-to-b from-cream to-blue from-[40%]">
+    
           <AboutV2 />
 
           <Projects />
-        </div>
+
       </div>
     </div>
   )

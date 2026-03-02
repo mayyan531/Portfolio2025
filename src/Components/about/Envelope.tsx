@@ -103,18 +103,16 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
     e.stopPropagation();
     if (noteRef.current && groupRef.current && isOpen) {
       if (noteOut) {
+        const groupPos = isSmallScreen ? 0 : -1;
         gsap.to(noteRef.current.position, { y: -0.8, duration: 0.4, ease: "power2.out" }).then(() => {
           setNoteOut(false);
         });
-
-        if (!isSmallScreen) {
-          gsap.to(groupRef.current.position, { y: -1, duration: 0.4, ease: "power2.out" });
-        }
+        gsap.to(groupRef.current.position, { y: groupPos, duration: 0.4, ease: "power2.out" });
+        
       } else {
+        const groupPos = isSmallScreen ? -0.5 : -2.5;
         gsap.to(noteRef.current.position, { y: 0.3, duration: 0.4, ease: "power2.out" });
-        if (!isSmallScreen) {
-          gsap.to(groupRef.current.position, { y: -2.5, duration: 0.4, ease: "power2.out" });
-        }
+        gsap.to(groupRef.current.position, { y: groupPos, duration: 0.4, ease: "power2.out" });
         setNoteOut(true);
       }
     }
@@ -137,7 +135,7 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
   });
 
   return (
-    <group {...props} dispose={null} scale={isSmallScreen ? 1.6 : 3} rotation={[Math.PI/2, isSmallScreen ? -Math.PI/2 : -Math.PI/2 - 0.1, Math.PI/2]} position={[0, -1 , 0]} ref={groupRef}>
+    <group {...props} dispose={null} scale={isSmallScreen ? 1.6 : 3} rotation={[Math.PI/2, isSmallScreen ? -Math.PI/2 : -Math.PI/2 - 0.1, Math.PI/2]} position={[0, isSmallScreen ? 0 : -1, 0]} ref={groupRef}>
       {/* Flap */}
       <group position={[-0.003, 0.707, 0.01]} rotation={[0, 0, 0.2]} ref={flapRef} onClick={(e) => handleFlapClick(e)} onPointerEnter={(e) => handleFlapHover(e, true)} onPointerLeave={(e) => handleFlapHover(e, false)}>
         <mesh geometry={nodes.Plane001.geometry} material={materials.inner} />
