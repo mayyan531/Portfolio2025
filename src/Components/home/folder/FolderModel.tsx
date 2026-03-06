@@ -117,7 +117,7 @@ function FolderModel({ onTextureLoaded, onFirstTimeOpened, ...props }: JSX.Intri
       } else {
         console.log("opening")
 
-        gsap.to(frontRef.current.rotation, { x: Math.PI/2 + 1, duration: 0.6, ease: "power2.out" })
+        gsap.to(frontRef.current.rotation, { x: Math.PI - 0.1, duration: 1, ease: "power2.out" })
         setFrontOpen(true);
       }
     }

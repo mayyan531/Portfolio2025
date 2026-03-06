@@ -6,7 +6,8 @@ import Scroll from "./Components/scroll/Scroll";
 import { useProgress } from "@react-three/drei";
 import { useState } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
-
+/* import Ender from "./Components/ender/ender";
+ */
 interface LoaderProps {
   onLoaded: () => void;
 }
@@ -35,7 +36,7 @@ function App() {
   }
 
   return (
-    <div className="inset-0 relative w-full select-none drag-none bg-gradient-to-b from-cream to-blue from-30%">
+    <div className="inset-0 relative w-full select-none drag-none bg-linear-to-b from-cream to-blue from-30%">
       <div className="absolute bottom-0 top-0">
         <Scroll />
       </div>
@@ -52,6 +53,8 @@ function App() {
 
           <Projects />
 
+{/*           <Ender />
+ */}
       </div>
     </div>
   )

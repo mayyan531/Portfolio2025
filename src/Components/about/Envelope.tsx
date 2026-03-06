@@ -25,23 +25,29 @@ type GLTFResult = GLTF & {
     Envelope001: THREE.Mesh
     Envelope002: THREE.Mesh
     Circle: THREE.Mesh
+    picture: THREE.Mesh
   }
   materials: {
     inner: THREE.MeshStandardMaterial
     outer: THREE.MeshStandardMaterial
     card: THREE.MeshStandardMaterial
     Material: THREE.MeshStandardMaterial
+    Picture: THREE.MeshStandardMaterial
   }
 }
 
 export function Envelope(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/Portfolio2025/envelope.glb') as unknown as GLTFResult
+
   const flapRef = useRef<THREE.Group>(null);
   const groupRef = useRef<THREE.Group>(null);
   const noteRef = useRef<THREE.Mesh>(null);
+  const pictureRef = useRef<THREE.Mesh>(null);
+  const githubRef = useRef<THREE.Mesh>(null);
+
   const [isOpen, setIsOpen] = useState(false);
   const [noteOut, setNoteOut] = useState(false);
-  const githubRef = useRef<THREE.Mesh>(null);
+  const [pictureOut, setPictureOut] = useState(false);
 
   const { contextSafe } = useGSAP({ scope: groupRef });
   let isSmallScreen = window.innerWidth > 1280 ? false : true;
@@ -70,6 +76,14 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
     texture3.minFilter = THREE.NearestFilter;
     texture3.colorSpace = THREE.SRGBColorSpace;
     materials.outer.map = texture3;
+
+    const texture4 = new THREE.TextureLoader().load('/Portfolio2025/assets/myImage.jpg');
+    texture4.flipY = false;
+    texture4.anisotropy = 0;
+    texture4.magFilter = THREE.NearestFilter;
+    texture4.minFilter = THREE.NearestFilter;
+    texture4.colorSpace = THREE.SRGBColorSpace;
+    materials.Picture.map = texture4;
   }, [])
 
 
@@ -129,6 +143,31 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
     }
   });
 
+    const onPictureClick = contextSafe((e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+    if (pictureRef.current && groupRef.current && isOpen) {
+      if (pictureOut) {
+        gsap.to(pictureRef.current.position, { y: 0, duration: 0.4, ease: "power2.out" }).then(() => {
+          setPictureOut(false);
+        });        
+      } else {
+        setPictureOut(true);
+        gsap.to(pictureRef.current.position, { y: 0.8, duration: 0.4, ease: "power2.out" });
+      }
+    }
+  });
+
+  const handlePictureHover = contextSafe((e: ThreeEvent<MouseEvent>, entering: boolean) => {
+    e.stopPropagation();
+    if (pictureRef.current) {
+      if (entering && !pictureOut && isOpen) {
+        gsap.to(pictureRef.current.position, { y: 0.1, duration: 0.3, ease: "power2.out" });
+      } else if (!entering && !pictureOut && isOpen) {
+        gsap.to(pictureRef.current.position, { y: 0, duration: 0.3, ease: "power2.out" });
+      }
+    }
+  });
+
   const onLinkClick = contextSafe((e: ThreeEvent<MouseEvent>, url: string) => {
     e.stopPropagation();
     window.open(url, '_blank');
@@ -159,6 +198,8 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
         <mesh geometry={nodes.Plane.geometry} material={materials.inner} />
         <mesh geometry={nodes.Plane_1.geometry} material={materials.outer} />
       </group>
+
+      <mesh geometry={nodes.picture.geometry} material={materials.Picture} position={[0.01, -0.038, -0.445]} rotation={[-0.256, 0, -Math.PI / 2]} scale={[0.564, 0.347, 0.403]} ref={pictureRef} onClick={(e) => onPictureClick(e)} onPointerEnter={(e) => handlePictureHover(e, true)} onPointerLeave={(e) => handlePictureHover(e, false)} />      
     </group>
   )
 }
