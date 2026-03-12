@@ -50,7 +50,19 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
   const [pictureOut, setPictureOut] = useState(false);
 
   const { contextSafe } = useGSAP({ scope: groupRef });
-  let isSmallScreen = window.innerWidth > 1280 ? false : true;
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 1280);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 1280);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const texture = new THREE.TextureLoader().load('/Portfolio2025/assets/aboutCard.png');

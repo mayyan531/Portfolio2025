@@ -34,8 +34,19 @@ interface Props{
 
 function FolderModel({ onTextureLoaded, onFirstTimeOpened, ...props }: JSX.IntrinsicElements['group'] & Props) {
   const { nodes, materials } = useGLTF('/Portfolio2025/folder.glb') as unknown as GLTFResult
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 1280);
 
-  let isSmallScreen = window.innerWidth > 1280 ? false : true;
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 1280);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const groupRef = useRef<THREE.Group>(null);
   const frontRef = useRef<THREE.Mesh>(null);
@@ -72,7 +83,6 @@ function FolderModel({ onTextureLoaded, onFirstTimeOpened, ...props }: JSX.Intri
     if (!frontRef.current) return
 
     intervalRef.current = setInterval(() => {
-      console.log("starting animation")
       timelineRef.current = gsap.timeline()
       .to(frontRef.current!.rotation, {
         x: 0.05,
@@ -109,14 +119,11 @@ function FolderModel({ onTextureLoaded, onFirstTimeOpened, ...props }: JSX.Intri
 
     if (frontRef.current) {
       if (frontOpen) {
-        console.log("closing")
         gsap.to(frontRef.current.rotation, { x: 0, duration: 0.8, ease: "power2.out" }).then(() => {
           setFrontOpen(false);
         });
 
       } else {
-        console.log("opening")
-
         gsap.to(frontRef.current.rotation, { x: Math.PI - 0.1, duration: 1, ease: "power2.out" })
         setFrontOpen(true);
       }
@@ -125,8 +132,6 @@ function FolderModel({ onTextureLoaded, onFirstTimeOpened, ...props }: JSX.Intri
 
   const onHover = contextSafe((e: ThreeEvent<MouseEvent>, entering: boolean) => {
     e.stopPropagation();
-
-    console.log("hovering", entering)
 
     if (frontRef.current && firstTimeOpened) {
       if (entering && !frontOpen) {

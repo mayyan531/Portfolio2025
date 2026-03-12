@@ -19,6 +19,15 @@
       opacity:1;
     }
   }
+
+  @keyframes flip {
+    0%, 49.999% {
+      transform: rotateY(0deg);
+    }
+    50%, 100% {
+      transform: rotateY(180deg);
+    }
+  }
 }
 
 
@@ -50,5 +59,14 @@
     animation: fade-in 0.8s ease-in backwards;
     animation-delay: 4s;
   }
+
+  .lily {
+    animation: flip 2.4s infinite;
+  }
+
+  .orchid {
+    animation: flip 2.4s infinite reverse;
+  }
 }
+
 

@@ -17,7 +17,7 @@ const Folder = ({}: Props) => {
     <div className={`flexh h-screen w-full relative transition-opacity duration-1000 ease-in-out ${textureLoaded ? "opacity-100" : "opacity-0"}`}>
         {loadImages && <Images />}
 
-        <Canvas className="w-full h-full" dpr={4}>            
+        <Canvas className="w-full h-full" dpr={[1,2]}>            
             <directionalLight position={[5, 1, 5]} intensity={3} color={0xFFF0C5}/>
             <ambientLight intensity={1.5} color={0xFFFFFF}/>
             <Environment files={"/Portfolio2025/suburban_garden_1k.hdr"} environmentIntensity={0.8}/>

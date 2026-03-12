@@ -3,21 +3,12 @@ import website from "/assets/website.png"
 import mazeRunner from "/assets/mazeRunner.png"
 import assertiveEmailer from "/assets/assertiveEmailer.png"
 import paper from "/assets/paper.png"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import lily from "/assets/lily.png"
 import orchid from "/assets/orchid.png"
 
 const Projects = () => {
   const [cardsClicked, setCardsClicked] = useState(false);
-  const [movement, setMovement] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMovement(prev => !prev);
-    }, 1200)
-
-    return () => clearInterval(interval);
-  }, [])
 
   return (
     <div className="h-screen w-full flex flex-col items-center justify-end overflow-hidden relative">
@@ -73,9 +64,9 @@ const Projects = () => {
         </div>
       </div>
 
-      <img src={lily} className={`hidden lg:block absolute h-1/3 left-20 bottom-10 ${movement ? '-rotate-20' : ''}`}/>
+      <img src={lily} className={`hidden lg:block absolute h-1/3 left-20 bottom-10 lily`}/>
 
-      <img src={orchid} className={`hidden lg:block absolute h-1/3 right-20 top-10 ${movement ? '' : '-rotate-20'}`}/>
+      <img src={orchid} className={`hidden lg:block absolute h-1/3 right-20 top-10 orchid`}/>
     </div>
   )
 }
