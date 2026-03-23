@@ -3,11 +3,18 @@ import Header from "./Components/header/Header";
 import AboutV2 from "./Components/about/AboutV2";
 import Projects from "./Components/projects/Projects";
 import Scroll from "./Components/scroll/Scroll";
+import Contact from "./Components/contact/Contact";
+
 import { useProgress } from "@react-three/drei";
 import { useState } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
-/* import Ender from "./Components/ender/ender";
- */
+
+interface foundImages {
+    smiskiFound: boolean;
+    flowerFound: boolean;
+    watermelonFound: boolean;
+}
+
 interface LoaderProps {
   onLoaded: () => void;
 }
@@ -30,6 +37,18 @@ function Loader({ onLoaded }: LoaderProps) {
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  const [foundImages, setFoundImages] = useState<foundImages>({
+    smiskiFound: false,
+    flowerFound: false,
+    watermelonFound: false,
+  });
+
+  const handleImageFound = (imageName: keyof foundImages) => {
+    setFoundImages(prevState => ({
+      ...prevState,
+      [imageName]: true,
+    }));
+  };
 
   if (!loaded) {
     return <Loader onLoaded={() => setLoaded(true)} />
@@ -41,20 +60,18 @@ function App() {
         <Scroll />
       </div>
   
-      <Folder />
+      <Folder handleImageFound={handleImageFound} />
 
-      <div className="relative">
+      <div className="relative w-full">
         <div className="hidden md:block absolute inset-0 pointer-events-none">
           <Header />
         </div>
 
-    
-          <AboutV2 />
+        <AboutV2 />
 
-          <Projects />
+        <Projects handleImageFound={handleImageFound} />
 
-{/*           <Ender />
- */}
+        <Contact foundImages={foundImages}/>
       </div>
     </div>
   )

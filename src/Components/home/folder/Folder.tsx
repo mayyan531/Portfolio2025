@@ -6,16 +6,23 @@ import FolderModel from './FolderModel'
 import { Environment } from '@react-three/drei'
 import { useState } from 'react'
 
-type Props = {
+interface foundImages {
+    smiskiFound: boolean;
+    flowerFound: boolean;
+    watermelonFound: boolean;
 }
 
-const Folder = ({}: Props) => {      
+type Props = {
+    handleImageFound: (imageName: keyof foundImages) => void;
+}
+
+const Folder = ({ handleImageFound }: Props) => {      
     const [textureLoaded, setTextureLoaded] = useState(false);
     const [loadImages, setLoadImages] = useState(false);
     
   return (
     <div className={`flexh h-screen w-full relative transition-opacity duration-1000 ease-in-out ${textureLoaded ? "opacity-100" : "opacity-0"}`}>
-        {loadImages && <Images />}
+        {loadImages && <Images handleImageFound={handleImageFound} />}
 
         <Canvas className="w-full h-full" dpr={[1,2]}>            
             <directionalLight position={[5, 1, 5]} intensity={3} color={0xFFF0C5}/>

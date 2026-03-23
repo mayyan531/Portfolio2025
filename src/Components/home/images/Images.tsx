@@ -38,18 +38,28 @@ const size = {
   xl: 'w-[14vw] min-w-[150px] max-w-[420px]',
 }
 
-const Images = () => {
+interface foundImages {
+    smiskiFound: boolean;
+    flowerFound: boolean;
+    watermelonFound: boolean;
+}
+
+interface Props {
+    handleImageFound: (imageName: keyof foundImages) => void;
+}
+
+const Images = ({ handleImageFound }: Props) => {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* FADE 2 */}
       <div className="fade-2">
-        <img src={watermelon} className={`hidden md:block md:absolute ${size.md} bottom-[8%] left-[12%] rotate-[70deg] `} alt='watermelon'/>
+        <img src={watermelon} className={`hidden md:block md:absolute ${size.md} bottom-[8%] left-[12%] rotate-[70deg] z-100`} onClick={() => handleImageFound('watermelonFound')} alt='watermelon'/>
         <img src={lily} className={`absolute ${size.xl} bottom-[3%] md:bottom-[25%] right-[0%] md:right-[18%]`} alt='lily' />
         <img src={dice} className={`absolute ${size.xs} md:top-[5%] right-[15%] -rotate-90`} alt='dice'/>
         <img src={mouse} className={`hidden md:block md:absolute ${size.md} top-[4%] left-[52%] `} alt='mouse' />
         <img src={cheesecake} className={`hidden md:block md:absolute ${size.xl} bottom-[35%] left-[15%]`} alt='cheesecake' />
         <img src={smiski} className={`absolute ${size.xs} top-[2%] right-[50%] `} alt='smiski' />
-        <img src={smiski2} className={`hidden md:block md:absolute ${size.md} bottom-[4%] right-[58%] `} alt='smiski2' />
+        <img src={smiski2} className={`hidden md:block md:absolute ${size.md} bottom-[4%] right-[58%] z-100 `} alt='smiski2' onClick={() => handleImageFound('smiskiFound')} />
         <img src={machineFoot} className={`hidden md:block md:absolute ${size.xs} bottom-[4%] left-[4%]`} alt='sewing machine foot'/>
       </div>
 

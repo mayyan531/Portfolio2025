@@ -7,7 +7,17 @@ import { useState } from "react"
 import lily from "/assets/lily.png"
 import orchid from "/assets/orchid.png"
 
-const Projects = () => {
+interface foundImages {
+    smiskiFound: boolean;
+    flowerFound: boolean;
+    watermelonFound: boolean;
+}
+
+interface Props {
+    handleImageFound: (imageName: keyof foundImages) => void;
+}
+
+const Projects = ({ handleImageFound }: Props) => {
   const [cardsClicked, setCardsClicked] = useState(false);
 
   return (
@@ -64,9 +74,9 @@ const Projects = () => {
         </div>
       </div>
 
-      <img src={lily} className={`hidden lg:block absolute h-1/3 left-20 bottom-10 lily`}/>
+      <img src={lily} className={`hidden md:block absolute h-1/3 left-20 bottom-10 lily`} onClick={() => {console.log("flower found"); handleImageFound('flowerFound')}}/>
 
-      <img src={orchid} className={`hidden lg:block absolute h-1/3 right-20 top-10 orchid`}/>
+      <img src={orchid} className={`hidden md:block absolute h-1/3 right-20 top-10 orchid`}/>
     </div>
   )
 }
