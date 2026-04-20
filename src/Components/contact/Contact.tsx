@@ -142,7 +142,7 @@ export default function Contact({ foundImages }: Props) {
 
             <div className="hidden md:flex w-full h-full flex-col items-center justify-center text-navy-blue my-10 max-w-lg z-100 relative gap-4">
                 <h1 className="w-full font-inter text-lg font-semibold italic md:text-2xl mt-1/2 text-center md:text-left">
-                    I spy with my little eye... <br/> a smiski lying down, a flower repeated twice, and an item whose color scheme doesn't match the rest of the website 
+                    I spy with my little eye... <br/> a smiski on a laptop, a flower repeated twice, and an item whose color scheme doesn't match the rest of the website 
                 </h1>
 
                 <div className='flex gap-5'>
