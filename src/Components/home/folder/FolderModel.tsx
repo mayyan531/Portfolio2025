@@ -33,7 +33,7 @@ interface Props{
 }
 
 function FolderModel({ onTextureLoaded, onFirstTimeOpened, ...props }: JSX.IntrinsicElements['group'] & Props) {
-  const { nodes, materials } = useGLTF('/Portfolio2025/folder.glb') as unknown as GLTFResult
+  const { nodes, materials } = useGLTF('/Portfolio/folder.glb') as unknown as GLTFResult
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 1280);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ function FolderModel({ onTextureLoaded, onFirstTimeOpened, ...props }: JSX.Intri
   const [firstTimeOpened, setFirstTimeOpened] = useState(false);
 
   useEffect(() => {
-    const texture = new THREE.TextureLoader().load('/Portfolio2025/assets/folderPaper.jpg');
+    const texture = new THREE.TextureLoader().load('/Portfolio/assets/folderPaper.jpg');
     texture.flipY = false;
     texture.anisotropy = 0;
     texture.magFilter = THREE.NearestFilter;
@@ -68,7 +68,7 @@ function FolderModel({ onTextureLoaded, onFirstTimeOpened, ...props }: JSX.Intri
     texture.colorSpace = THREE.SRGBColorSpace;
     materials.folder.map = texture;
 
-    const texture2 = new THREE.TextureLoader().load('/Portfolio2025/assets/homeNote.png');
+    const texture2 = new THREE.TextureLoader().load('/Portfolio/assets/homeNote.png');
     texture2.flipY = false;
     texture2.anisotropy = 0;
     texture2.magFilter = THREE.NearestFilter;
@@ -155,4 +155,4 @@ function FolderModel({ onTextureLoaded, onFirstTimeOpened, ...props }: JSX.Intri
 
 export default memo(FolderModel)
 
-useGLTF.preload('/Portfolio2025/folder.glb')
+useGLTF.preload('/Portfolio/folder.glb')

@@ -37,7 +37,7 @@ type GLTFResult = GLTF & {
 }
 
 export function Envelope(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/Portfolio2025/envelope.glb') as unknown as GLTFResult
+  const { nodes, materials } = useGLTF('/Portfolio/envelope.glb') as unknown as GLTFResult
 
   const flapRef = useRef<THREE.Group>(null);
   const groupRef = useRef<THREE.Group>(null);
@@ -65,7 +65,7 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
   }, []);
 
   useEffect(() => {
-    const texture = new THREE.TextureLoader().load('/Portfolio2025/assets/aboutCard.png');
+    const texture = new THREE.TextureLoader().load('/Portfolio/assets/aboutCard.png');
     texture.flipY = false;
     texture.anisotropy = 0;
     texture.magFilter = THREE.NearestFilter;
@@ -73,7 +73,7 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
     texture.colorSpace = THREE.SRGBColorSpace;
     materials.card.map = texture;
     
-    const texture2 = new THREE.TextureLoader().load('/Portfolio2025/assets/innerTexture.jpg');
+    const texture2 = new THREE.TextureLoader().load('/Portfolio/assets/innerTexture.jpg');
     texture2.flipY = false;
     texture2.anisotropy = 0;
     texture2.magFilter = THREE.NearestFilter;
@@ -81,7 +81,7 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
     texture2.colorSpace = THREE.SRGBColorSpace;
     materials.inner.map = texture2;
 
-    const texture3 = new THREE.TextureLoader().load('/Portfolio2025/assets/outerTexture.png');
+    const texture3 = new THREE.TextureLoader().load('/Portfolio/assets/outerTexture.png');
     texture3.flipY = false;
     texture3.anisotropy = 0;
     texture3.magFilter = THREE.NearestFilter;
@@ -89,7 +89,7 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
     texture3.colorSpace = THREE.SRGBColorSpace;
     materials.outer.map = texture3;
 
-    const texture4 = new THREE.TextureLoader().load('/Portfolio2025/assets/myImage.jpg');
+    const texture4 = new THREE.TextureLoader().load('/Portfolio/assets/myImage.jpg');
     texture4.flipY = false;
     texture4.anisotropy = 0;
     texture4.magFilter = THREE.NearestFilter;
@@ -197,7 +197,7 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
       {/* Card */}
       <group position={[0, -0.8, 0]} scale={1.05} ref={noteRef} onClick={(e) => onCardClick(e)} onPointerEnter={(e) => handleCardHover(e, true)} onPointerLeave={(e) => handleCardHover(e, false)}>
         <mesh geometry={nodes.github.geometry} ref={githubRef} material={materials.card} onPointerEnter={() => { document.body.style.cursor = 'pointer'; }} onPointerLeave={() => { document.body.style.cursor = 'default'; }} onClick={(e) => onLinkClick(e, 'https://github.com/mayyan531')} />
-        <mesh geometry={nodes.resume.geometry} material={materials.card} onPointerEnter={() => { document.body.style.cursor = 'pointer'; }} onPointerLeave={() => { document.body.style.cursor = 'default'; }} onClick={(e) => onLinkClick(e, `${import.meta.env.BASE_URL}files/May_Resume2026.pdf`)} />
+        <mesh geometry={nodes.resume.geometry} material={materials.card} onPointerEnter={() => { document.body.style.cursor = 'pointer'; }} onPointerLeave={() => { document.body.style.cursor = 'default'; }} onClick={(e) => onLinkClick(e, `${import.meta.env.BASE_URL}Files/May_Resume2026.pdf`)} />
         <mesh geometry={nodes.linkedin.geometry} material={materials.card} onPointerEnter={() => { document.body.style.cursor = 'pointer'; }} onPointerLeave={() => { document.body.style.cursor = 'default'; }} onClick={(e) => onLinkClick(e, 'https://www.linkedin.com/in/yanm34/')} />
         <mesh geometry={nodes.Plane003.geometry} material={materials.card} />
         <mesh geometry={nodes.Plane003_1.geometry} material={materials.outer} />        
@@ -216,4 +216,4 @@ export function Envelope(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/Portfolio2025/envelope.glb')
+useGLTF.preload('/Portfolio/envelope.glb')

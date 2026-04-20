@@ -107,7 +107,7 @@ const About = () => {
             </p>
 
             <div className='flex'>
-              <a href='/files/May_Resume2026.pdf' target='_blank'>
+              <a href='https://www.linkedin.com/in/mayyan531/' target='_blank'>
                 <FaLinkedin size="40px" className='mx-4 hover:text-blue' />
               </a>
 
@@ -115,7 +115,7 @@ const About = () => {
                 <SiGithub size="40px" className='mx-4 hover:text-blue'/>
               </a>
 
-              <a href={`${import.meta.env.BASE_URL}files/May_Resume2026.pdf`} target='_blank' rel="noopener noreferrer">
+              <a href={`${import.meta.env.BASE_URL}Files/May_Resume2026.pdf`} target='_blank' rel="noopener noreferrer">
                 <BsFileEarmarkPerson size="40px" className='mx-4 hover:text-blue'/>
               </a>
             </div>

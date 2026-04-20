@@ -27,7 +27,7 @@ const Folder = ({ handleImageFound }: Props) => {
         <Canvas className="w-full h-full" dpr={[1,2]}>            
             <directionalLight position={[5, 1, 5]} intensity={3} color={0xFFF0C5}/>
             <ambientLight intensity={1.5} color={0xFFFFFF}/>
-            <Environment files={"/Portfolio2025/suburban_garden_1k.hdr"} environmentIntensity={0.8}/>
+            <Environment files={"/Portfolio/suburban_garden_1k.hdr"} environmentIntensity={0.8}/>
             <FolderModel receiveShadow castShadow onTextureLoaded={() => setTextureLoaded(true)} onFirstTimeOpened={() => {setLoadImages(true)}} /> 
         </Canvas>
 
@@ -46,7 +46,7 @@ const Folder = ({ handleImageFound }: Props) => {
                 </div>
                 
                 <div className='absolute bottom-3 right-3 px-4 rounded-md text-navy-blue font-inter text-sm font-medium italic bg-blue'>
-                    May Yan - 2025
+                    May Yan - 
                 </div>
             </div>
         </div> */}
